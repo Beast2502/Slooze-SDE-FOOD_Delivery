@@ -1,0 +1,1 @@
+export const orderStatus = ['pending', 'preparing', 'on the way', 'delivered', 'cancelled']

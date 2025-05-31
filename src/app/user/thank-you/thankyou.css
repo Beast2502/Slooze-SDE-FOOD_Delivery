@@ -1,0 +1,60 @@
+
+.thankyou-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 70vh;
+    align-items: center;
+}
+
+.thankyou-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+.check-icon {
+  width: 80px;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  color: #2ecc71;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: #333;
+  margin: 0.3rem 0;
+}
+
+.actions {
+  margin-top: 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  background: #ff4757;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  margin: 0.3rem;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #e84118;
+}
+
+.btn-secondary {
+  background: #576574;
+}
+
+.btn-secondary:hover {
+  background: #2f3542;
+}

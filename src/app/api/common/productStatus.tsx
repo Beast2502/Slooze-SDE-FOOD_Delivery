@@ -1,0 +1,1 @@
+export const productStatus = ['active', 'inactive']

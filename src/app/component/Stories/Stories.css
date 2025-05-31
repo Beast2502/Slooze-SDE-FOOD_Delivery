@@ -1,0 +1,43 @@
+/* Story Bar */
+.story-bar {
+  display: flex;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  gap: 0.8rem;
+}
+
+.story {
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.story img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #ff4757;
+  object-fit: cover;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.story img:hover {
+  transform: scale(1.08);
+}
+
+.story span {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+/* Hide scrollbar on Chrome, Safari and Edge */
+.story-bar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar on Firefox */
+.story-bar {
+  scrollbar-width: none;
+}

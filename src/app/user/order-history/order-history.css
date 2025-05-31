@@ -1,0 +1,71 @@
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333;
+}
+
+.order-card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-header h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.status.delivered {
+  background: #4CAF50;
+}
+
+.status.cancelled {
+  background: #E53935;
+}
+
+.status.in-progress {
+  background: #FF9800;
+}
+
+.order-card p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.details-btn {
+  background: #ff3d00;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.details-btn:hover {
+  background: #e53935;
+}
