@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import './signup.css'
+import { rolesList } from "../api/common/adminRoles";
+import toast from "react-hot-toast";
+import { countriesList } from "../api/common/countries";
 
 export default function SignUpPage() {
 
@@ -13,13 +16,21 @@ export default function SignUpPage() {
     const [user, setUser] = useState({
         email: "",
         password: "",
-        userName: "",
-        confirmPass: ""
+        username: "",
+        confirmPass: "",
+        role: "",
+        country: ""
     })
 
 
-    const onSignUp = async () => {
-        console.log(user)
+    const onSignUp = async (e) => {
+        e.preventDefault();
+
+        axios.post('/api/auth/signup', user).then(res => {
+            console.log(res.data)
+            toast.success("Signed-up Sucessfully!");
+            router.push('/login')
+        }).catch(err => toast.error(err.response.data.error))
     }
 
     return <>
@@ -29,13 +40,13 @@ export default function SignUpPage() {
                     <h2>Create Account 🎉</h2>
                     <p className="subtitle">Join Foodies today</p>
 
-                    <form action="#">
+                    <form>
                         <label>Full Name</label>
                         <input
                             type="text"
                             placeholder="John Doe"
                             required
-                            onChange={(e) => { setUser({ ...user, userName: e.target.value }) }}
+                            onChange={(e) => { setUser({ ...user, username: e.target.value }) }}
                         />
 
                         <label>Email</label>
@@ -45,6 +56,21 @@ export default function SignUpPage() {
                             required
                             onChange={(e) => { setUser({ ...user, email: e.target.value }) }}
                         />
+
+                        <label>Role</label>
+                        <select onChange={(e) => setUser({ ...user, role: e.target.value })}>
+                            <option>Select Role</option>
+
+                            {rolesList.filter(data => data.name !== 'ADMIN').map(data => <option key={data.name}>{data.name}</option>)}
+                        </select>
+
+                        <label>Country</label>
+                         <select onChange={(e) => setUser({ ...user, country: e.target.value })}>
+                            <option>Select Coutry</option>
+
+                            {countriesList.map(data => <option key={data}>{data}</option>)}
+                        </select>
+
 
                         <label>Password</label>
                         <input
@@ -63,9 +89,10 @@ export default function SignUpPage() {
 
                         />
 
-                        <button type="submit">Sign Up</button>
 
-                        <p className="login-link" onClick={onSignUp}>Already have an account? <a onClick={()=> router.push('/login')}>Login</a></p>
+                        <button onClick={onSignUp}>Sign Up</button>
+
+                        <p className="login-link">Already have an account? <a onClick={() => router.push('/login')}>Login</a></p>
                     </form>
                 </div>
             </div>

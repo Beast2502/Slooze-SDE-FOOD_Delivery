@@ -10,8 +10,6 @@ export default function Home() {
 
   const [restaurants, setRestaurant] = useState([]);
 
-
-  // const restaurants = [
   //   {
   //     id: 1,
   //     name: "Indian Accent",
@@ -125,8 +123,6 @@ export default function Home() {
       setRestaurant(res.data.data)
     })
   }
-
-        console.log(restaurants, "DATA CHECK11")
 
   useEffect(() => {
     getTheData()

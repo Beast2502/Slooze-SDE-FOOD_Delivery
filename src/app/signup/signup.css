@@ -45,6 +45,15 @@ form input {
   border-radius: 5px;
   margin-bottom: 1rem;
 }
+
+form select {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  background-color: white;
+}
 form button {
   width: 100%;
   background: #ff4757;

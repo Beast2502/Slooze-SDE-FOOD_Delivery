@@ -21,9 +21,11 @@ export default function LoginPage() {
         if (!user.email) return toast.error("Please enter email!");
         if (!user.password) return toast.error("Please enter password!")
 
-        axios.post('/api/auth/login', user).then((data) => {
-            console.log(data, "login done")
+        axios.post('/api/auth/login', user).then((res) => {
+            console.log(res.data.token, "login done")
+            sessionStorage.setItem('token' , res.data.token)
             toast.success("Hi you are logged in");
+            router.push("/")
 
         }).catch(err => {
             console.log(err.response.data.error, "error");

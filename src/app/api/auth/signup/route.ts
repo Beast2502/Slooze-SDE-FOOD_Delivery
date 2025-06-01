@@ -13,15 +13,15 @@ export async function POST(request: NextRequest) {
 
         const reqBody = await request.json();
 
-        const { username, email, password } = reqBody;
+        const { username, email, password, role , country} = reqBody;
 
         const user = await User.findOne({ email });
 
         if (user) {
             return NextResponse.json({
-                error : "User Already exists!",
-                status : 400
-            })
+                error: "User Already exists!",
+
+            }, { status: 400 })
         }
 
         // hash pass
@@ -31,18 +31,20 @@ export async function POST(request: NextRequest) {
         const newUser = new User({
             username,
             email,
-            password: hashPassword
+            password: hashPassword,
+            role,
+            country,
         })
 
         const savedUser = await newUser.save();
 
 
         return NextResponse.json({
-            message : "User created Successfully",
-            success : true,
-            savedUser
-        }
-          
+            message: "User created Successfully",
+            success: true,
+        },
+            { status: 200 }
+
         )
     } catch (err) {
 

@@ -45,6 +45,12 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Delivery address is required'],
     },
+    customerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, 'Registered User Id is needed'],
+
+    }
   },
   {
     timestamps: true,
@@ -53,4 +59,4 @@ const orderSchema = new mongoose.Schema(
 
 const Order = mongoose.model('Order', orderSchema);
 
-module.exports = Order;
+export default Order;

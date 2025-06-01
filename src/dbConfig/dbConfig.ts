@@ -9,6 +9,7 @@ if (!MONGO_URL) {
 let isConnected = false;
 
 export async function connect() {
+  console.log("Connecting to database.......")
   if (isConnected) {
     console.log("✅ Already connected to MongoDB.");
     return;

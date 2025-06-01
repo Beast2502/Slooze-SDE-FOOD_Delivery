@@ -14,7 +14,11 @@ const Header = () => {
                     <li><a onClick={() => router.push('/')}>Home</a></li>
                     {/* <li><a href="#">Order</a></li> */}
                     <li><a onClick={() => router.push('/user/restaurant')}>Restaurants</a></li>
-                    <li><a onClick={() => router.push('/login')} >Login</a></li>
+                    {
+                        sessionStorage.getItem('token') ?
+                            <li><a onClick={() => router.push('/user/order-history')} ><i class="fa-solid fa-user"></i></a></li> :
+                            <li><a onClick={() => router.push('/login')} >Login</a></li>
+                    }
                 </ul>
             </div>
         </nav>

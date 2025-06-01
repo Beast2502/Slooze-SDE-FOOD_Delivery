@@ -1,10 +1,30 @@
 'use client'
 import CartDrawer from "@/src/app/component/CartDrawer/CartDrawer"
 import "./restaurant.css"
-import { useState } from "react"
-const RestaurantsDetailPage = () => {
+import { use, useEffect, useState } from "react"
+import axios from "axios"
+const RestaurantsDetailPage = ({ params }) => {
 
-    const [drawer, setDrawer] = useState(false)
+    const id = use(params).id;
+
+    const [drawer, setDrawer] = useState(false);
+
+    const [loading, setLoading] = useState(false);
+    const [restaurantDetails, setRestaurantDetails] = useState({});
+    const [productList, setProductList] = useState([]);
+
+
+
+    useEffect(() => {
+
+        setLoading(true)
+        axios.get(`/api/restaurant/${id}`).then(res => {
+            console.log(res.data, "RESTAURANT DATA");
+            setRestaurantDetails(res.data.restaurantDetails);
+            setProductList(res.data.productsList)
+            setLoading(false)
+        })
+    }, [])
 
     return (<>
         <section className="banner">
@@ -13,10 +33,10 @@ const RestaurantsDetailPage = () => {
 
         <section className="restaurant-info">
             <div className="container">
-                <h1>Burger House</h1>
-                <p className="details">Category: Fast Food, Burgers | Rating: ⭐ 4.5 | 📍 New Delhi</p>
+                <h1>{restaurantDetails?.name}</h1>
+                <p className="details">Category: {restaurantDetails?.categories} | Rating: ⭐ {restaurantDetails?.rating} | 📍 {restaurantDetails.address} ,{restaurantDetails?.country}</p>
                 <p className="description">
-                    Burger House is known for its mouth-watering juicy burgers made with fresh ingredients and our secret sauces. Come enjoy a variety of options in a cozy environment.
+                    {restaurantDetails?.description}
                 </p>
             </div>
         </section>
@@ -26,45 +46,33 @@ const RestaurantsDetailPage = () => {
                 <h1>Popular Dishes</h1>
                 <div className="food-grid">
 
-                    <div className="food-card">
-                        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pasta Alfredo" />
-                        <div className="card-content">
-                            <h3>Cheese Pizza</h3>
-                            <p>⭐ 4.6 | ₹250</p>
-                            <button className="btn">Add to Cart</button>
-                        </div>
-                    </div>
 
-                    <div className="food-card">
-                        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pasta Alfredo" />
-                        <div className="card-content">
-                            <h3>Veg Burger</h3>
-                            <p>⭐ 4.4 | ₹180</p>
-                            <div className="action-row">
-                                <div className="quantity">
-                                    <button className="qty-btn"
-                                    // onClick="decreaseQty(this)"
-                                    >-</button>
-                                    <span className="qty-value">1</span>
-                                    <button className="qty-btn"
-                                    // onClick="increaseQty(this)"
-                                    >+</button>
+                    {productList.map(data =>
+                        <div className="food-card">
+                            <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pasta Alfredo" />
+                            <div className="card-content">
+                                <h3>{data.name}</h3>
+                                <p>⭐ 4.4 | ₹{data.price}</p>
+                                <div className="action-row">
+                                    <div className="quantity">
+                                        <button className="qty-btn"
+                                            // onClick="decreaseQty(this)"
+                                            onClick={() => console.log(data._id)}
+                                        >-</button>
+                                        <span className="qty-value">0</span>
+                                        <button className="qty-btn"
+                                        // onClick="increaseQty(this)"
+                                        >+</button>
+                                    </div>
+                                    <button className="btn" onClick={() => setDrawer(true)}>Add to Cart</button>
                                 </div>
-                                <button className="btn">Add to Cart</button>
                             </div>
-                        </div>
-                    </div>
+                        </div>)}
 
-                    <div className="food-card">
-                        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pasta Alfredo" />
-                        <div className="card-content">
-                            <h3>Pasta Alfredo</h3>
-                            <p>⭐ 4.5 | ₹220</p>
-                            <button className="btn" onClick={() => setDrawer(true)}>Add to Cart</button>
-                        </div>
-                    </div>
 
-                    <CartDrawer open={drawer} setOpen={setDrawer}/>
+
+                   
+                    <CartDrawer open={drawer} setOpen={setDrawer} />
 
                 </div>
             </div>
