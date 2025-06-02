@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import toast, { Toaster } from 'react-hot-toast';
+import { Provider } from "react-redux";
+import ClientLayout from "./client-layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +32,10 @@ export default function RootLayout({ children }) {
           referrerPolicy="no-referrer"
         />
         <Toaster />
-        {children}
+        <ClientLayout>
+
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );
