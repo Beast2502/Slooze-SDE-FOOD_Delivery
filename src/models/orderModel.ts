@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { orderStatus } from "../app/api/common/orderStatus";
+import { orderStatus, paymentStatus } from "../app/api/common/orderStatus";
 
 const orderSchema = new mongoose.Schema(
   {
@@ -18,11 +18,11 @@ const orderSchema = new mongoose.Schema(
         },
       },
     ],
-    restaurant: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Restaurant', // link to Restaurant
-      required: true,
-    },
+    // restaurant: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'Restaurant', // link to Restaurant
+    //   required: true,
+    // },
     totalPrice: {
       type: Number,
       required: true,
@@ -31,6 +31,11 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: orderStatus,
+      default: 'pending',
+    },
+    payMentStatus: {
+      type: String,
+      enum: paymentStatus,
       default: 'pending',
     },
     customerName: {

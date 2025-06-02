@@ -22,11 +22,6 @@ const cartSchema = new mongoose.Schema(
         },
       },
     ],
-    restaurant: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Restaurant',
-      required: [true, 'Cart must be associated with a restaurant'],
-    },
     totalPrice: {
       type: Number,
       required: true,

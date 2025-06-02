@@ -133,7 +133,7 @@ restaurant-info {
 /* Quantity and Action Row */
 .action-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 1rem;
 }

@@ -1,7 +1,10 @@
 import { connect } from "@/src/dbConfig/dbConfig";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, userAgent } from "next/server";
 import jwt from "jsonwebtoken";
 import Order from "@/src/models/orderModel";
+import User from "@/src/models/userModel";
+import { rolesList } from "../common/adminRoles";
+import Product from "@/src/models/productModel";
 
 
 export async function POST(request: NextRequest) {
@@ -30,17 +33,24 @@ export async function POST(request: NextRequest) {
                 { status: 400 })
         }
 
+        const { role } = await User.findById(id);
+
+        console.log(role, "ROLE CHECK")
+
+        if (role === 'MEMBER') return NextResponse.json({ mesage: "You are not authorized" }, { status: 500 })
+
+
         const reqBody = await request.json();
 
         const { products, restaurant, totalPrice, customerName, customerContact, deliveryAddress } = reqBody;
         const orderCreate = new Order({
             products,
-            restaurant,
+            // restaurant,
             totalPrice,
             customerName,
             customerContact,
             deliveryAddress,
-            customerId : id
+            customerId: id
         })
 
         const saveOrder = await orderCreate.save();
@@ -82,7 +92,16 @@ export async function GET(request: NextRequest) {
                 { status: 400 })
         }
 
-        const orderList = await Order.find()
+        const orderList = await Order.find({ customerId: id }).populate('products.product')  // 👈 this line fetches product details
+      .exec();;
+
+        const getProductDetails = async (id) => {
+            const result = await Product.findById(id);
+            return result
+        }
+
+
+        
 
         return NextResponse.json({ orderList }, { status: 200 })
 

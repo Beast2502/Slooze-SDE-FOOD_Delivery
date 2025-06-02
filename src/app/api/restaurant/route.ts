@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import Restaurant from "@/src/models/restaurantModel";
+import User from "@/src/models/userModel";
 
 
 export async function GET(request: NextRequest) {
@@ -10,7 +11,7 @@ export async function GET(request: NextRequest) {
     try {
         await connect();
 
-        // const tokenRecieved = request.cookies.get('token');
+        const tokenRecieved = request.cookies.get('token');
 
         // if (!tokenRecieved) {
 
@@ -20,18 +21,21 @@ export async function GET(request: NextRequest) {
         // }
 
 
-        // const { email } = await jwt.verify(tokenRecieved.value, process.env.TOKEN_SECRET);
+        if (!tokenRecieved) {
 
-        // if (!email) {
+            const restaurantList = await Restaurant.find();
 
-        //     return NextResponse.json(
-        //         { error: "Not authorized User" },
-        //         { status: 400 })
-        // }
+            return NextResponse.json({
+                data: restaurantList
+            }, { status: 200 })
+        }
+
+        const { id } = await jwt.verify(tokenRecieved.value, process.env.TOKEN_SECRET);
+
+        const { country } = await User.findById(id)
 
 
-
-        const restaurantList = await Restaurant.find();
+        const restaurantList = await Restaurant.find({ country });
 
 
 

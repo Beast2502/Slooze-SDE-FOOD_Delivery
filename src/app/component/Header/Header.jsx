@@ -2,9 +2,23 @@
 
 import { useRouter } from "next/navigation"
 import "./Header.css"
+import { useEffect, useState } from "react";
 const Header = () => {
 
     const router = useRouter();
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+        const storedToken = sessionStorage.getItem('token');
+        setToken(storedToken);
+    }, []);
+
+    const handleLogOut = () => {
+        sessionStorage.clear('')
+        document.cookie = `${token}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        router.push('/')
+
+    }
 
     return (
         <nav className="navbar">
@@ -15,8 +29,14 @@ const Header = () => {
                     {/* <li><a href="#">Order</a></li> */}
                     <li><a onClick={() => router.push('/user/restaurant')}>Restaurants</a></li>
                     {
-                        sessionStorage.getItem('token') ?
-                            <li><a onClick={() => router.push('/user/order-history')} ><i class="fa-solid fa-user"></i></a></li> :
+                        token ?
+                            <>
+                                <li><a onClick={() => router.push('/user/order-history')} >Order History</a></li>
+                                <li><a onClick={() => router.push('/user/order-history')} ><i className="fa-solid fa-user"></i></a></li>
+                                <li><a onClick={handleLogOut} >Log Out</a></li>
+
+
+                            </> :
                             <li><a onClick={() => router.push('/login')} >Login</a></li>
                     }
                 </ul>

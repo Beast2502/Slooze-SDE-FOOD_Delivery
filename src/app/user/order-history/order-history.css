@@ -43,6 +43,7 @@ h1 {
 
 .status.cancelled {
   background: #E53935;
+  color: white;
 }
 
 .status.in-progress {
