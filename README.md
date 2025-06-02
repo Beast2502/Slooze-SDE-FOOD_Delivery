@@ -7,8 +7,12 @@ TOKEN_SECRET = mkstest123
 
 #MONGO_URL = mongodb+srv://mehulsaxena45:oyqfNr5jzo0du5XO@cluster0.jipsw36.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
+"admin USER"
+admin121@gmail.com
+admin
+
 You can use your own db also
-For makeing initial user added the postamn collection you can add the user products restaurants 
+For makeing initial user ADMIN  ->added the postamn collection -> you can add the user products restaurants 
 
 
 
