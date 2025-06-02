@@ -52,13 +52,20 @@ const OrderHistoryPage = () => {
             prevousOrders.map(data => <div className="order-card" key={data._id}>
                 <div className="order-header">
                     <h3>Order ID : {data._id}</h3>
-                    <span className={data.status === "cancelled" ? "status cancelled " : "status delivered "}>{data.status}</span>
-                    <button className='status cancelled' onClick={() => handleCancelOrder(data._id)}>Cancel Order</button>
-                    <select value={data.payMentStatus} onChange={(e)=>handleOrderStatus(data._id , e.target.value)}>
-                        {
-                            paymentStatus.map(status => <option value={status}>{status}</option>)
-                        }
-                    </select>
+                    <div>
+                        <span className={data.status === "cancelled" ? "status cancelled " : "status delivered "}>{data.status}</span>
+                        <button className='status cancelled' onClick={() => handleCancelOrder(data._id)}>Cancel Order</button>
+
+                        <div>
+                            <span className='status in-progress'>Payment Status</span>
+                            <select value={data.payMentStatus} onChange={(e) => handleOrderStatus(data._id, e.target.value)}>
+                                {
+                                    paymentStatus.map(status => <option value={status}>{status}</option>)
+                                }
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
                 <p><strong>Order Date:</strong>{data.createdAt}</p>
                 <p><strong>Items:</strong>  {data.products.map(item => <div>{item.product.name} * {item.quantity} Qty</div>)} </p>

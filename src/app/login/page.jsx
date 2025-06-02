@@ -40,7 +40,7 @@ export default function LoginPage() {
         <div className="login-main-container">
             <div className="login-container">
                 <div className="login-card">
-                    <h2>Welcome Back 👋</h2>
+                    <h2 onClick={()=>router.push("/")}>Welcome Back 👋</h2>
                     <p className="subtitle">Login to your account</p>
 
                     <form>
