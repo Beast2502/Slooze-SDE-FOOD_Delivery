@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import "./Header.css"
 import { useEffect, useState } from "react";
+import axios from "axios";
 const Header = () => {
 
     const router = useRouter();
@@ -14,9 +15,12 @@ const Header = () => {
     }, []);
 
     const handleLogOut = () => {
-        sessionStorage.clear('')
-        document.cookie = `${token}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-        router.push('/')
+        axios.get('/api/auth/logout').then(res => {
+            sessionStorage.clear('')
+            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            router.push('/login')
+        })
+
 
     }
 

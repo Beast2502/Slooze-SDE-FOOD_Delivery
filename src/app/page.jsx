@@ -21,10 +21,17 @@ export default function Home() {
   useEffect(() => {
     getTheData()
   }, [])
+
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    const storedToken = sessionStorage.getItem('token');
+    setToken(storedToken);
+  }, []);
   return (
     <div>
 
-        <Header />
+      <Header />
 
       <div>
         <section className="hero">
@@ -46,7 +53,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <FloatingCart />
+        {token && <FloatingCart />}
 
         <footer className="footer">
           <div className="container">
