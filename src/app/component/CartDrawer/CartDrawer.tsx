@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useEffect, useState } from 'react';
-import { addToCart } from '@/src/store/cart/cartSlice';
+import { addToCart, removeFromCart, reduceFromCart } from '@/src/store/cart/cartSlice';
 const CartDrawer = ({ open, setOpen }) => {
 
   const router = useRouter();
 
   const cartItems = useSelector(state => state.cart.products);
 
-  const [cart, setCart] = useState(cartItems);
+  const [cart, setCart] = useState([]);
 
   let total = 0;
 
@@ -31,8 +31,12 @@ const CartDrawer = ({ open, setOpen }) => {
 
     });
 
-
   }
+
+
+  const dispatch = useDispatch()
+
+  console.log(cartItems, cart, "CART ITEMS CHECK")
 
 
   const handleAddToCart = (poductDeatils, type) => {
@@ -40,43 +44,27 @@ const CartDrawer = ({ open, setOpen }) => {
 
     if (type === "add") {
 
-      if (cart.filter(data => data.product === poductDeatils._id).length) {
+      dispatch(addToCart({
+        product: poductDeatils.product,
+        quantity: 1,
+        price: poductDeatils.price,
+        name: poductDeatils.name,
+        image: poductDeatils.image
 
-        setCart(cart => cart.map(item => item.product === poductDeatils._id ?
-          { ...item, quantity: item.quantity + 1 } : item))
+      }))
 
-      } else {
-
-        setCart([...cart, {
-          product: poductDeatils._id,
-          quantity: 1,
-          price: poductDeatils.price,
-          name: poductDeatils.name,
-          image: poductDeatils.images
-        }])
-      }
-    }
-    if (type === 'remove') {
-      if (cart.filter(data => data.product === id)) {
-        setCart(cart => cart.map(item => (item.product === id) && { ...item, quantity: item.quantity - 1 }))
-
-      } else {
-        setCart([...cart, {
-          product: id,
-          quantity: 1
-        }])
-      }
 
     }
 
+    if (type === "remove") {
+      dispatch(reduceFromCart(
+        { id: poductDeatils.product }
+
+      ))
+    }
   }
 
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-
-    dispatch(addToCart(cart))
-  }, [cart])
 
 
   return (
@@ -94,14 +82,14 @@ const CartDrawer = ({ open, setOpen }) => {
                 <h4>{product.name}</h4>
                 <p>₹{product.price} x {product.quantity}</p>
                 <div className="quantity">
-                  <button className='qty-btn'>-</button>
+                  <button className='qty-btn' onClick={() => handleAddToCart(product, "remove")}>-</button>
                   <span>{product.quantity}</span>
                   <button className='qty-btn'
-                    onClick={() => handleAddToCart(product.name, "add")
+                    onClick={() => handleAddToCart(product, "add")
                     }>+</button>
                 </div>
               </div>
-              <i className="fa fa-trash remove-item"></i>
+              <i className="fa fa-trash remove-item" onClick={() => dispatch(removeFromCart(product.name))}></i>
             </div>
           </>)
         }

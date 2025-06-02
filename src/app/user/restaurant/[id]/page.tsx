@@ -5,7 +5,7 @@ import { use, useEffect, useState } from "react"
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { addToCart } from "@/src/store/cart/cartSlice"
-const RestaurantsDetailPage = ({ params } : any) => {
+const RestaurantsDetailPage = ({ params }: any) => {
 
     const id = use(params).id;
 
@@ -30,31 +30,19 @@ const RestaurantsDetailPage = ({ params } : any) => {
 
     const [cart, setCart] = useState([]);
 
-    useEffect(() => {
-
-        dispatch(addToCart(cart))
-    }, [cart])
-
     const handleAddToCart = (poductDeatils, type) => {
 
 
         if (type === "add") {
 
-            if (cart.filter(data => data.product === poductDeatils._id).length) {
+            dispatch(addToCart({
+                product: poductDeatils._id,
+                quantity: 1,
+                price: poductDeatils.price,
+                name: poductDeatils.name,
+                image: poductDeatils.images
 
-                setCart(cart => cart.map(item => item.product === poductDeatils._id ?
-                    { ...item, quantity: item.quantity + 1 } : item))
-
-            } else {
-
-                setCart([...cart, {
-                    product: poductDeatils._id,
-                    quantity: 1,
-                    price : poductDeatils.price,
-                    name : poductDeatils.name,
-                    image : poductDeatils.images
-                }])
-            }
+            }))
         }
 
     }
