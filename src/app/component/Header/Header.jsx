@@ -4,10 +4,13 @@ import { useRouter } from "next/navigation"
 import "./Header.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useTranslations } from 'next-intl';
+
 const Header = () => {
 
     const router = useRouter();
     const [token, setToken] = useState('');
+    const t = useTranslations('HomePage');
 
     useEffect(() => {
         const storedToken = sessionStorage.getItem('token');
@@ -27,7 +30,7 @@ const Header = () => {
     return (
         <nav className="navbar">
             <div className="container nav-container">
-                <div className="logo" onClick={() => router.push('/')}>Foodies</div>
+                <div className="logo" onClick={() => router.push('/')}>{t('title')}</div>
                 <ul className="nav-links">
                     <li><a onClick={() => router.push('/')}>Home</a></li>
                     {/* <li><a href="#">Order</a></li> */}
