@@ -7,9 +7,11 @@ import StoriesSection from "./component/Stories/Stories";
 import "./globals.css"
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
+import { useTranslations } from "next-intl";
 export default function Home() {
 
   const [restaurants, setRestaurant] = useState([]);
+    const t = useTranslations('HomePage');
 
   const getTheData = () => {
     axios.get('/api/restaurant').then(res => {
@@ -44,7 +46,7 @@ export default function Home() {
           <div className="container">
             <StoriesSection />
 
-            <h2>Popular Restaurants</h2>
+            <h2>{t('PopularRestaurants')}</h2>
 
             <div className="cards">
 

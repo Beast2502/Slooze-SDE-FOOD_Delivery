@@ -1,5 +1,11 @@
 {
   "HomePage": {
-    "title": "Hello world! FR"
+    "title": "Gourmands",
+    "Home": "Accueil",
+    "Restaurants": "Restaurants",
+    "OrderHistory": "Historique des commandes",
+    "LogOut": "Se déconnecter",
+    "Login": "Connexion",
+    "PopularRestaurants": "Restaurants populaires"
   }
 }

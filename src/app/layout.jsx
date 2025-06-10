@@ -26,6 +26,7 @@ export default async function RootLayout({ children }) {
   const locale = await getLocale();
 
 
+  console.log(locale,"LOCALE CHECK IN LAYOUT")
   return (
     <html lang={locale}>
       <body

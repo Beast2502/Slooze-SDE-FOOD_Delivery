@@ -24,3 +24,36 @@
   text-decoration: none;
   font-weight: 500;
 }
+
+
+
+.language-selector {
+  max-width: 250px;
+  background: #fff;
+  padding: 6px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  text-align: center;
+  display: flex;
+}
+
+.language-selector label {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.language-selector select {
+  width: 100%;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.language-selector select:focus {
+  outline: none;
+  border-color: #ff3d00;
+  box-shadow: 0 0 4px rgba(255, 61, 0, 0.3);
+}

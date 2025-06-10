@@ -1,5 +1,11 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
-  }
+    "HomePage": {
+        "title": "Foodies",
+        "Home": "Home",
+        "Restaurants": "Restaurants",
+        "OrderHistory": "Order History",
+        "LogOut": "Log Out",
+        "Login": "Login",
+        "PopularRestaurants" : "Popular Restaurants"
+    }
 }

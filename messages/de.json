@@ -1,5 +1,11 @@
 {
   "HomePage": {
-    "title": "Hello world! de"
+    "title": "Fijnproevers",
+    "Home": "Home",
+    "Restaurants": "Restaurants",
+    "OrderHistory": "Bestelgeschiedenis",
+    "LogOut": "Uitloggen",
+    "Login": "Inloggen",
+    "PopularRestaurants": "Populaire Restaurants"
   }
 }
