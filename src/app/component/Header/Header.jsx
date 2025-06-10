@@ -42,7 +42,22 @@ const Header = () => {
                                 <li><a onClick={() => router.push('/user/order-history')} ><i className="fa-solid fa-user"></i></a></li>
                                 <li><a onClick={handleLogOut} >Log Out</a></li>
 
+                                <li>
+                                    <div className="language-selector">
+                                        <label htmlFor="language">🌐 Select Language:</label>
+                                        <select id="language" 
+                                        onChange={
+                                            (e) => {}
+                                            } 
+                                            value={lang}>
+                                            {/* {
+                                                routing.locales.map(lang => <option key={lang} value={lang}>{lang}</option>
+                                                )
+                                            } */}
 
+                                        </select>
+                                    </div>
+                                </li>
                             </> :
                             <li><a onClick={() => router.push('/login')} >Login</a></li>
                     }
